@@ -1,2 +1,8 @@
-# C-PyMoTeG
-C-written-Python-Module-Template-Generator
+# PyCEMoTeG
+Python C Extension Module Template Generator
+
+## Installation
+
+
+## Usage
+
