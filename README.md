@@ -1,7 +1,7 @@
 # pemog
 **P**ython **E**xtension-**Mo**dule **G**enerator
 
-⚠️ This is still under developpment ⚠️
+⚠️ This is still under developpment (please do not use yet) ⚠️
 
 The only supported language is C, for now.
 
