@@ -30,7 +30,7 @@ example(int, str, ?)
 twoplustwo (?,?) ?
 ```
 
-It basically describes the functions you want to implement. This step should be somehow automated.
+It basically describes the functions you want to implement. This step should be automated in the future, based on the python code you would provide.
 
 For example :
 ```bash
