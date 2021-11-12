@@ -12,7 +12,7 @@ static const char <@m_name@>_doc[?];
 PyDoc_STRVAR(<@m_name@>_doc, "<@m_name@> documentation ...");
 
 static PyMethodDef <@M_Name@>Methods[] = {
-    <@m_methods_definitions@>
+<@m_methods_definitions@>
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 
