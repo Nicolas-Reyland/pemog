@@ -9,7 +9,7 @@ FLAGS :=
 
 .PHONY: all
 all:
-	$(HC) $(FLAGS) src/Main.hs src/Pemog.hs -o pemog
+	$(HC) $(FLAGS) src/Main.hs src/Pemog.hs src/TemplateFormat.hs -o pemog
 
 install:
 	install -d $(DESTDIR)$(PREFIX)/bin/
