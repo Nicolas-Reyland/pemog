@@ -3,7 +3,7 @@
 
 ⚠️ This is still under developpment (please do not use yet) ⚠️
 
-The only supported language is C, for now.
+The only supported language for extension modules is C, for now. The python implementation should be CPython.
 
 ## Installation
 You need [ghc](https://www.haskell.org/ghc/) to be installed on your system.
