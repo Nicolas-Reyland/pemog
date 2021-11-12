@@ -12,11 +12,15 @@ all:
 	$(HC) $(FLAGS) src/Main.hs src/Pemog.hs src/TemplateFormat.hs -o pemog
 
 install:
-	install -d $(DESTDIR)$(PREFIX)/bin/
-	install -m 711 pemog $(DESTDIR)$(PREFIX)/bin/
+	@echo "/!\\ please do not yet use the install rule"
+	false
+	#install -d $(DESTDIR)$(PREFIX)/bin/
+	#install -m 711 pemog $(DESTDIR)$(PREFIX)/bin/
 
 uninstall:
-	if [ -e $(PREFIX)/bin/ ]; then rm -f $(PREFIX)/bin/pemog; else echo "Not installed"; fi
+	@echo "/!\\ please do not yet use the (un)install rule"
+	false
+	#if [ -e $(PREFIX)/bin/ ]; then rm -f $(PREFIX)/bin/pemog; else echo "Not installed"; fi
 
 .PHONY: clean
 clean:
