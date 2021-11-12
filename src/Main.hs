@@ -9,6 +9,6 @@ main = do
             error "Usage: pemog module-name input-file output-file"
         else (args !! 0, args !! 1, args !! 2)
     contents <- readFile input_file
-    let newContents = processFile contents
+    newContents <- processFile module_name contents
     when (length newContents > 0) $
         writeFile output_file newContents
