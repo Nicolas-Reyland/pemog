@@ -20,6 +20,16 @@ make
 ./pemog module-name input-file output-file
 ```
 
+An input file could look like this :
+```
+system(str) int
+test ()
+example(int, str, ?)
+twoplustwo (?,?) ?
+```
+
+It basically describes the functions you want to implement. This step should be somehow automated.
+
 For example :
 ```bash
 ./pemog spam src/templates/spam.sketch spammodule.c
