@@ -12,15 +12,15 @@ You need [ghc](https://www.haskell.org/ghc/) to be installed on your system.
 git clone https://github.com/Nicolas-Reyland/pemog
 cd pemog
 make
-sudo make install
+# sudo make install # do not yet do this
 ```
 
 ## Usage
 ```bash
-pemog module-name input-file output-file
+./pemog module-name input-file output-file
 ```
 
 For example :
 ```bash
-pemog spam spam.sketch spammodule.c
+./pemog spam src/templates/spam.sketch spammodule.c
 ```
