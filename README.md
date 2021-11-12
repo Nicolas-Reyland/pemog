@@ -3,7 +3,7 @@
 
 ⚠️ This is still under developpment (please do not use yet) ⚠️
 
-The only supported language for extension modules is C, for now. The python implementation should be CPython.
+The goal of **pemog** is to generate big portions of code based on python code, when rewriting a python module in another language. For now, the only supported language for extension modules is C. The python implementation should be CPython.
 
 ## Installation
 You need [ghc](https://www.haskell.org/ghc/) to be installed on your system.
