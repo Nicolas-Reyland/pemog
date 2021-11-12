@@ -20,12 +20,12 @@ returnCode s = case s of
     [] -> "// None return"
     _  -> "// other return"
 
-snakeCase :: String -> String
-snakeCase [] = ""
-snakeCase [c] = [toLower c]
-snakeCase (c1:c2:s)
-    | isLower c1 && isUpper c2 = c1 :'_' : toLower c2 : snakeCase s
-    | otherwise = toLower c1 : toLower c2 : snakeCase s
+camelToSnakeCase :: String -> String
+camelToSnakeCase [] = ""
+camelToSnakeCase [c] = [toLower c]
+camelToSnakeCase (c1:c2:s)
+    | isLower c1 && isUpper c2 = c1 :'_' : toLower c2 : camelToSnakeCase s
+    | otherwise = toLower c1 : toLower c2 : camelToSnakeCase s
 
 generateMethodImpl :: String -> String -> [String] -> Map.Map String String -> IO String
 generateMethodImpl method_name return_type args token_map = do
@@ -40,7 +40,7 @@ generateMethodDef (method_name, return_type, args) token_map = do
 generateModule :: String -> [(String, String, [String])] -> IO String
 generateModule module_name methods = do
     -- basic token map
-    let token_list = [ ("m_name", snakeCase module_name)
+    let token_list = [ ("m_name", camelToSnakeCase module_name)
                      , ("M_Name", module_name)]
         token_map = Map.fromList token_list
     -- method implementations & definitions (in that order)
