@@ -29,23 +29,25 @@ snakeCase (c1:c2:s)
 
 generateMethodImpl :: String -> String -> [String] -> Map.Map String String -> IO String
 generateMethodImpl method_name return_type args token_map = do
-    method_template <- readFile "src/templates/method_implementation.c"
-    let new_token_map = Map.insert "method_name" method_name $ Map.insert "return" (returnCode return_type) token_map
-        method_string = evaluateTokens method_template new_token_map
-    return method_string
+    method_impl_template <- readFile "src/templates/method_implementation.c"
+    return $ evaluateTokens method_impl_template $ Map.insert "method_name" method_name $ Map.insert "return" (returnCode return_type) token_map
+
+generateMethodDef :: (String, String, [String]) -> Map.Map String String -> IO String
+generateMethodDef (method_name, return_type, args) token_map = do
+    method_def_template <- readFile "src/templates/method_definition.c"
+    return $ evaluateTokens method_def_template $ Map.insert "method_name" method_name $ Map.insert "method_arg_types" "METH_VARARGS" token_map
 
 generateModule :: String -> [(String, String, [String])] -> IO String
 generateModule module_name methods = do
-    module_template <- readFile "src/templates/module_template.c"
+    -- basic token map
     let token_list = [ ("m_name", snakeCase module_name)
                      , ("M_Name", module_name)]
         token_map = Map.fromList token_list
-        methods_definitions = "method definitions"
-    method_implementations <- mapM (\ (a,b,c) -> generateMethodImpl a b c token_map) methods
-    return $ unlines method_implementations ++ methods_definitions
-
-{-                     , ("m_methods_implementations", unlines $ map (\
-                        (a,b,c) -> generateMethodImpl a b c)
-                     )
-                     , ("m_methods_definitions", "method defs here ...")]
-    -}
+    -- method implementations & definitions (in that order)
+    methods_definitions <- mapM (flip generateMethodDef token_map) methods
+    methods_implementations <- mapM (\ (a,b,c) -> generateMethodImpl a b c token_map) methods
+    let all_implementations = unlines methods_implementations
+        all_definitions = unlines methods_definitions
+    -- fill module template
+    module_template <- readFile "src/templates/module_template.c"
+    return $ evaluateTokens module_template $ Map.insert "m_methods_implementations" all_implementations $ Map.insert "m_methods_definitions" all_definitions token_map
