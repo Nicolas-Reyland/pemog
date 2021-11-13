@@ -31,12 +31,12 @@ camelToSnakeCase (c1:c2:s)
 
 generateMethodImpl :: PyMethod -> Map.Map String String -> IO String
 generateMethodImpl (method_name, return_type, args) token_map = do
-    method_impl_template <- readFile "src/templates/method_implementation.c"
+    method_impl_template <- readFile "src/templates/method_implementation.tmpl"
     return $ evaluateTokens method_impl_template $ Map.insert "method_name" method_name $ Map.insert "return" (returnCode return_type) token_map
 
 generateMethodDef :: PyMethod -> Map.Map String String -> IO String
 generateMethodDef (method_name, return_type, args) token_map = do
-    method_def_template <- readFile "src/templates/method_definition.c"
+    method_def_template <- readFile "src/templates/method_definition.tmpl"
     return $ evaluateTokens method_def_template $ Map.insert "method_name" method_name $ Map.insert "method_arg_types" "METH_VARARGS" token_map
 
 generateModule :: String -> [PyMethod] -> IO String
@@ -51,5 +51,5 @@ generateModule module_name methods = do
     let all_implementations = unlines methods_implementations
         all_definitions = unlines methods_definitions
     -- fill module template
-    module_template <- readFile "src/templates/module_template.c"
+    module_template <- readFile "src/templates/module_template.tmpl"
     return $ evaluateTokens module_template $ Map.insert "m_methods_implementations" all_implementations $ Map.insert "m_methods_definitions" all_definitions token_map
