@@ -1,8 +1,6 @@
 # pemog
 **P**ython **E**xtension-**Mo**dule **G**enerator
 
-⚠️ This is still under developpment (please do not use yet) ⚠️
-
 The goal of **pemog** is to generate portions of code in another language based on python code, when rewriting a python module. For now, the only supported language for extension modules is C.
 
 For now, only empty functions are generated.
