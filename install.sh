@@ -30,9 +30,9 @@ then
     exit 1
 fi
 
-# install all the libraries
-# cabal update
-# cabal install regex-posix
+# install the required libraries
+cabal update
+cabal install regex-posix
 
 # compiling the project
 make all
@@ -45,3 +45,6 @@ cp src/templates/*.tmpl $HOME/.local/etc/pemog/
 chmod 755 pemog
 mkdir -p $HOME/.local/bin
 cp pemog $HOME/.local/bin/pemog
+
+# End message
+echo "Done. Please make sure that '$HOME/.local/bin' is in your PATH"
