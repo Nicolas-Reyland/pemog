@@ -9,22 +9,21 @@ You need [ghc](https://www.haskell.org/ghc/) to be installed on your system.
 ```bash
 git clone https://github.com/Nicolas-Reyland/pemog
 cd pemog
-make
-# sudo make install # do not yet do this
+./install
 ```
 
 ## Usage
 
 ### With python files :
 ```bash
-./pemog name input-file.py namemodule.c
+pemog name input-file.py namemodule.c
 ```
 
 The `name` should be the name of the module
 
 ### With sketch files :
 ```bash
-./pemog name input-file.sketch namemodule.c
+pemog name input-file.sketch namemodule.c
 ```
 
 The *sketch* files describe one function of your extension module per line. Each line should be formatted like this :
@@ -45,6 +44,7 @@ It basically describes the functions you want to implement. If you do not wish t
 
 ## TODO :
  * Use [language-python](https://github.com/bjpop/language-python) or [hpython](https://github.com/qfpl/hpython) for python parsing
+ * Generate code for return
  * Documentation generation based on argument types, function return-type etc.
  * Split generated code into multiple files
  * Testing
