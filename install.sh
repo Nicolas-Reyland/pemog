@@ -31,15 +31,17 @@ then
 fi
 
 # install all the libraries
-cabal install regex-posix
+# cabal update
+# cabal install regex-posix
 
 # compiling the project
 make all
 
 # copying the templates
-mkdir -p $HOME/.local/etc/pemog
-cp src/templates/*.tmpl $HOME/.local/etc/pemog
+mkdir -p $HOME/.local/etc/pemog/
+cp src/templates/*.tmpl $HOME/.local/etc/pemog/
 
 # copying the binary file
 chmod 755 pemog
-cp pemog $HOME/.local/bin
+mkdir -p $HOME/.local/bin
+cp pemog $HOME/.local/bin/pemog
