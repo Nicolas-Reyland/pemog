@@ -2,8 +2,15 @@ module TemplateFormat where
 import Data.List
 import Data.Char
 import qualified Data.Map as Map
+import System.Posix.User
 
 type PyMethod = (String, String, [String])
+
+absFilePath :: String -> IO String
+absFilePath file_name = do
+    uid <- getRealUserID
+    entry <- getUserEntryForID uid
+    return $ homeDirectory entry ++ "/.local/etc/pemog/" ++ file_name
 
 evaluateMaybe :: String -> Maybe a -> a
 evaluateMaybe _ (Just x) = x
@@ -20,7 +27,7 @@ evaluateTokens s token_map
 returnCode :: String -> String
 returnCode s = case s of
     [] -> "// None return"
-    _  -> "// other return"
+    _  -> "// ~value~ return"
 
 camelToSnakeCase :: String -> String
 camelToSnakeCase [] = ""
@@ -31,12 +38,14 @@ camelToSnakeCase (c1:c2:s)
 
 generateMethodImpl :: PyMethod -> Map.Map String String -> IO String
 generateMethodImpl (method_name, return_type, args) token_map = do
-    method_impl_template <- readFile "src/templates/method_implementation.tmpl"
+    file_path <- absFilePath "method_implementation.tmpl"
+    method_impl_template <- readFile file_path
     return $ evaluateTokens method_impl_template $ Map.insert "method_name" method_name $ Map.insert "return" (returnCode return_type) token_map
 
 generateMethodDef :: PyMethod -> Map.Map String String -> IO String
 generateMethodDef (method_name, return_type, args) token_map = do
-    method_def_template <- readFile "src/templates/method_definition.tmpl"
+    file_path <- absFilePath "method_definition.tmpl"
+    method_def_template <- readFile file_path
     return $ evaluateTokens method_def_template $ Map.insert "method_name" method_name $ Map.insert "method_arg_types" "METH_VARARGS" token_map
 
 generateModule :: String -> [PyMethod] -> IO String
@@ -51,5 +60,6 @@ generateModule module_name methods = do
     let all_implementations = unlines methods_implementations
         all_definitions = unlines methods_definitions
     -- fill module template
-    module_template <- readFile "src/templates/module_template.tmpl"
+    file_path <- absFilePath "module_template.tmpl"
+    module_template <- readFile file_path
     return $ evaluateTokens module_template $ Map.insert "m_methods_implementations" all_implementations $ Map.insert "m_methods_definitions" all_definitions token_map
