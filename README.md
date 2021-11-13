@@ -11,6 +11,7 @@ git clone https://github.com/Nicolas-Reyland/pemog
 cd pemog
 ./install
 ```
+You should make sure that *$HOME/.local/bin* is included in your path.
 
 ## Usage
 
