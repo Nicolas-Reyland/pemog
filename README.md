@@ -5,7 +5,7 @@
 
 The goal of **pemog** is to generate portions of code in another language based on python code, when rewriting a python module. For now, the only supported language for extension modules is C.
 
-For now, only empty functions can be generated, based on a very simply formatted input file.
+For now, only empty functions are generated.
 
 ## Installation
 You need [ghc](https://www.haskell.org/ghc/) to be installed on your system.
