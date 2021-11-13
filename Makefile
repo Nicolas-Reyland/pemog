@@ -9,7 +9,7 @@ FLAGS :=
 
 .PHONY: all
 all:
-	$(HC) $(FLAGS) src/Main.hs src/Pemog.hs src/TemplateFormat.hs -o pemog
+	$(HC) $(FLAGS) src/Main.hs src/Pemog.hs src/SketchParse.hs src/PyRegexParse.hs src/TemplateFormat.hs -o pemog
 
 install:
 	@echo "/!\\ please do not yet use the install rule"
